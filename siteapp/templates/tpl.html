@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>模板语法</h1>
+    <div>{{n1}}</div>
+    <div>{{n2}}</div>
+    <div>{{n2.0}}</div>
+    <div>{{n2.1}}</div>
+    <div>{{n2.2}}</div>
+    <div>
+        {% for item in n2%}
+            <span>{{item}}</span>
+        {% endfor %}
+    </div>
+    <hr/>
+{{n3}}
+{{n3.name}}
+{{n3.salary}}
+{{n3.role}}
+<ul>
+{% for k,v in n3.items%}
+    <li>{{k}} = {{v}}</li>
+{% endfor %}
+</ul>
+<hr>
+{{n4.1}}
+{{n4.1.name}}
+{{n4.1.role}}
+
+{% for item in n4%}
+    <div>{{item.name}} {{item.salary}}</div>
+{% endfor %}
+    <hr>
+{% if n1 == "Jason"%}
+    <h1>dududu</h1>
+{% elif n1 == "XXXX"%}
+    <h1>pipipi</h1>
+{%else%}
+    <h1>dadada</h1>
+{%endif%}
+</body>
+</html>
+
+<!--
+视图函数的render()内部
+1.读取含有模板语法的html文件
+2.内部进行渲染（模板语法执行并替换数据）
+最终得到，只包含HTML标签的字符串
+3.将渲染（替换）完成的字符串返还给用户浏览器
+-->
