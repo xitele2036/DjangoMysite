@@ -1,6 +1,6 @@
 import json
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import requests
 
 Headers = {
@@ -46,3 +46,39 @@ def news(req):
     # data_list = json.loads(res.text)
     # print(res.text)
     return render(req,'news.html',{"news_list":res.text})
+
+def something(request):
+    # request是一个对象，封装了用户通过浏览器发过来的所有数据
+    # 获取请求方式：GET/POST
+    print(request.method)
+
+    #在URL上传递值 ?n1=123&n2=999
+    print(request.GET)
+
+    #在请求中提交数据
+    print(request.POST)
+
+    # HttpResponse("返回内容") 将字符串内容返回给请求者
+    # return HttpResponse("返回内容")
+
+    #读取HTML的内容 + 渲染（替换） -> 字符串，返还给请求者
+    # return render(request,'something.html',{"title":" come on"})
+
+    #重定向一个地址给请求者
+    return redirect("https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=80&type=T")
+
+def login(request):
+    if request.method == "GET":
+        return render(request,"login.html")
+
+    # print(request.POST)
+    username = request.POST.get("user")
+    password = request.POST.get("pwd")
+    # print(username)
+    # print(password)
+    if username == "root" and password == "admin123":
+        # return HttpResponse("登入成功")
+        return redirect("https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=20&type=T")
+
+        # return HttpResponse("登入失败")
+    return render(request,"login.html",{"error_msg":"登入失败"})

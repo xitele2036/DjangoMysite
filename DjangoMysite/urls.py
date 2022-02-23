@@ -25,5 +25,11 @@ urlpatterns = [
     path('user/add/', views.user_add),
     path('tpl/', views.tpl),
     path('news/', views.news),
+    path('something/', views.something),
+
+    #登入
+    path('login/', views.login),
+
+
 ]
 
