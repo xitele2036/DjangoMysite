@@ -2,6 +2,7 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import requests
+from siteapp.models import Department,UserInfo
 
 Headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
@@ -82,3 +83,32 @@ def login(request):
 
         # return HttpResponse("登入失败")
     return render(request,"login.html",{"error_msg":"登入失败"})
+
+def orm(request):
+    #测试ORM操作数据库的数据
+    ####新建####
+    # Department.objects.create(title="销售部")
+    # Department.objects.create(title="IT部")
+    # Department.objects.create(title="运营部")
+
+    # UserInfo.objects.create(name='JASON',password='admin12333',age=22)
+    # UserInfo.objects.create(name='TOM',password='admin12333',age=22)
+    # UserInfo.objects.create(name='BIT',password='admin12333',age=22)
+
+    ####删除####
+    # UserInfo.objects.filter(id=3).delete()
+    # Department.objects.all().delete()
+
+    ###获取数据####
+    # data_list= UserInfo.objects.all()
+    # for obj in data_list:
+    #     print(obj.id, obj.name, obj.password, obj.age)
+    # data_list= UserInfo.objects.filter(id=2).first()
+    # print(data_list.id, data_list.name, data_list.password, data_list.age)
+
+    ###更新数据####
+    # UserInfo.objects.all().update(password=9999)
+    UserInfo.objects.filter(name='JASON').update(age=9999)
+
+
+    return HttpResponse("成功")

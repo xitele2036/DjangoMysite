@@ -29,6 +29,7 @@ urlpatterns = [
 
     #登入
     path('login/', views.login),
+    path('orm/', views.orm),
 
 
 ]
