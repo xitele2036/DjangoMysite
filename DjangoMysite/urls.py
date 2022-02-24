@@ -19,18 +19,19 @@ from django.urls import path
 from siteapp import views
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('index/', views.index),
     path('user/list/', views.user_list),
     path('user/add/', views.user_add),
     path('tpl/', views.tpl),
     path('news/', views.news),
     path('something/', views.something),
-
     #登入
     path('login/', views.login),
     path('orm/', views.orm),
 
+    path('info/list', views.info_list),
+    path('info/add', views.info_add),
 
 ]
 

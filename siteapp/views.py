@@ -1,4 +1,6 @@
 import json
+import socket
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import requests
@@ -36,7 +38,6 @@ def tpl(request):
         {"name": "TOM", "salary": 10000, "role": "CTO"},
     ]
     return render(request,'tpl.html',{"n1":name,"n2":roles,"n3":user_info,"n4":date_list})
-
 
 def news(req):
     # 定义一些新闻（字典或者列表），数据库，网络请求去联通新闻
@@ -112,3 +113,27 @@ def orm(request):
 
 
     return HttpResponse("成功")
+
+def info_list(request):
+    #获取数据库中的所有的用户信息
+    data_list = UserInfo.objects.all()
+
+    return render(request,'infolist.html',{"data_list":data_list})
+
+def info_add(request):
+    local_host = get_host_ip()
+    print(local_host)
+    if request.method == "GET":
+        return render(request,"info_add.html")
+
+
+
+def get_host_ip():
+    '''获取本机ip'''
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect('8.8.8.8', 80)
+        ip = s.getsockname()[0]
+    finally:
+        s.close()
+    return ip
